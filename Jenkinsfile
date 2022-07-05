@@ -2,6 +2,11 @@ node{
 
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
 
+  echo "Job Name : ${env.JOB_NAME}"
+  echo "node : ${env.NODE_NAME}"
+  echo "no : ${env.BUILD_NUMBER}"
+  
+
 def mavenHome = tool name: "maven3.8.4"
 stage('CheckoutCode')
 {
