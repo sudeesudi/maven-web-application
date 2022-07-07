@@ -45,9 +45,9 @@ sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@17
     }
 }
 
-def notifyBuild(String buildStatus = 'STARTED') 
+def sendSlackNotifications(String buildStatus = 'STARTED') 
 {
-  buildStatus =  buildStatus ?: 'SUCCESSFUL'
+  buildStatus =  buildStatus ?: 'SUCCESS'
 
   // Default values
   def colorName = 'RED'
@@ -66,3 +66,4 @@ def notifyBuild(String buildStatus = 'STARTED')
     color = 'RED'
     colorCode = '#FF0000'
   }
+}
