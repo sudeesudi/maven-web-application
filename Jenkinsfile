@@ -8,6 +8,7 @@ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKe
   echo "Build no : ${env.BUILD_NUMBER}"
   
 try {
+	sendSlackNotifications('STARTED')
   stage('CheckoutCode')
 {
 git branch: 'development', credentialsId: 'e5262c9e-56f9-4358-8a54-61cb5b23a537', url: 'https://github.com/sudeesudi/maven-web-application.git'
