@@ -1,12 +1,12 @@
 node{
-
+	
+def mavenHome = tool name: "maven3.8.4"
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
 
   echo "Job Name : ${env.JOB_NAME}"
   echo "node : ${env.NODE_NAME}"
-  echo "no : ${env.BUILD_NUMBER}"
+  echo "Build no : ${env.BUILD_NUMBER}"
   
-def mavenHome = tool name: "maven3.8.4"
 try {
   stage('CheckoutCode')
 {
@@ -35,13 +35,13 @@ sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@17
 }
 */
 } 
-	catch (e)
+	catch(e)
 	{
         currentBuild.result = "FAILED"
         throw e
     }
 	finally {
-        sendSlackNotifications(curentBuild.result)
+        sendSlackNotifications(currentBuild.result)
     }
 }
 
